@@ -3,7 +3,7 @@ package org.okten.demo.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-//import org.okten.demo.dto.SendMailDto;
+import org.okten.demo.dto.SendMailDto;
 import org.okten.demo.entity.Product;
 import org.okten.demo.dto.UpsertProductDto;
 import org.okten.demo.dto.ProductDto;
@@ -22,7 +22,8 @@ public class ProductService {
     private  final ProductRepository productRepository;
 
     private final ProductMapper productMapper;
-//    private final MailService mailService;
+
+    private final MailService mailService;
 
     public Optional<ProductDto> findById(Long id) {
         return productRepository
