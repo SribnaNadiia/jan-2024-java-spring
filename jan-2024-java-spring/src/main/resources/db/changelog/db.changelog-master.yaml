@@ -1,0 +1,188 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1.0.1"
+      author: "eokten"
+      changes:
+        - createSequence:
+            sequenceName: "products_seq"
+        - createTable:
+            tableName: "products"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  constraints:
+                    primary: true
+                  defaultValueSequenceNext: "products_seq"
+              - column:
+                  name: "name"
+                  type: "text"
+              - column:
+                  name: "price"
+                  type: "numeric"
+#  - changeSet:
+#      id: "1.0.2"
+#      author: "eokten"
+#      changes:
+#        - addColumn:
+#            tableName: "products"
+#            columns:
+#              - column:
+#                  name: "availability"
+#                  type: "varchar(50)"
+  - changeSet:
+      id: "1.0.3"
+      author: "eokten"
+      changes:
+        - addColumn:
+            tableName: "products"
+            columns:
+              - column:
+                  name: "temp_availability"
+                  type: "smallint"
+  - changeSet:
+      id: "1.0.4"
+      author: "eokten"
+      changes:
+        - addUniqueConstraint:
+            tableName: "products"
+            columnNames: "id"
+        - createSequence:
+            sequenceName: "orders_seq"
+        - createTable:
+            tableName: "orders"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  constraints:
+                    primary: true
+                    unique: true
+                  defaultValueSequenceNext: "orders_seq"
+              - column:
+                  name: "order_date"
+                  type: "timestamp with time zone"
+        - createTable:
+            tableName: "order_items"
+            columns:
+              - column:
+                  name: "order_id"
+                  type: "bigint"
+                  constraints:
+                    foreignKeyName: "order_items_fk1"
+                    referencedColumnNames: "id"
+                    referencedTableName: "orders"
+              - column:
+                  name: "product_id"
+                  type: "bigint"
+                  constraints:
+                    foreignKeyName: "order_items_fk2"
+                    referencedColumnNames: "id"
+                    referencedTableName: "products"
+              - column:
+                  name: "quantity"
+                  type: "int"
+              - column:
+                  name: "comment"
+                  type: "text"
+
+
+
+#databaseChangeLog:
+#  - changeSet:
+#      id: "1.0.1"
+#      author: "eokten"
+#      changes:
+#        - createSequence:
+#            sequenceName: "products_seq"
+#        - createTable:
+#            tableName: "products"
+#            columns:
+#              - column:
+#                  name: "id"
+#                  type: "bigint"
+#                  constraints:
+#                    primary: true
+#                  defaultValueSequenceNext: "products_seq"
+#              - column:
+#                  name: "name"
+#                  type: "text"
+#              - column:
+#                  name: "price"
+#                  type: "numeric"
+#  - changeSet:
+#      id: "1.0.2"
+#      author: "eokten"
+#      changes:
+#        - addColumn:
+#            tableName: "products"
+#            columns:
+#              - column:
+#                  name: "availability"
+#                  type: "varchar(50)"
+#        - sqlFile:
+#            path: "classpath:/db/changelog/changes/set-default-availability.sql"
+#  - changeSet:
+#      id: "1.0.3"
+#      author: "eokten"
+#      changes:
+#        - addColumn:
+#            tableName: "products"
+#            columns:
+#              - column:
+#                  name: "temp_availability"
+#                  type: "smallint"
+#        - sqlFile:
+#            path: "classpath:/db/changelog/changes/update-availability-values.sql"
+#        - dropColumn:
+#            tableName: "products"
+#            columnName: "availability"
+#        - renameColumn:
+#            tableName: "products"
+#            newColumnName: "availability"
+#            oldColumnName: "temp_availability"
+#  - changeSet:
+#      id: "1.0.4"
+#      author: "eokten"
+#      changes:
+#        - addUniqueConstraint:
+#            tableName: "products"
+#            columnNames: "id"
+#        - createSequence:
+#            sequenceName: "orders_seq"
+#        - createTable:
+#            tableName: "orders"
+#            columns:
+#              - column:
+#                  name: "id"
+#                  type: "bigint"
+#                  constraints:
+#                    primary: true
+#                    unique: true
+#                  defaultValueSequenceNext: "orders_seq"
+#              - column:
+#                  name: "order_date"
+#                  type: "timestamp with time zone"
+#        - createTable:
+#            tableName: "order_items"
+#            columns:
+#              - column:
+#                  name: "order_id"
+#                  type: "bigint"
+#                  constraints:
+#                    foreignKeyName: "order_items_fk1"
+#                    referencedColumnNames: "id"
+#                    referencedTableName: "orders"
+#              - column:
+#                  name: "product_id"
+#                  type: "bigint"
+#                  constraints:
+#                    foreignKeyName: "order_items_fk2"
+#                    referencedColumnNames: "id"
+#                    referencedTableName: "products"
+#              - column:
+#                  name: "quantity"
+#                  type: "int"
+#              - column:
+#                  name: "comment"
+#                  type: "text"

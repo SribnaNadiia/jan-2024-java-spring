@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Spring Boot Demo Project
+
+reference-data:
+  categories: Goods for home, Building Goods
+  offices:
+    - name: "Building Office 1 "
+      contactNumber: "+2353"
+      address:
+        city: "Kiyv"
+        street: "Street 15 "
+
+    - name: "Building Office 2 "
+      contactNumber: "+3545"
+      address:
+        city: "Kharkiv"
+        streer: "Street 852"
+
+

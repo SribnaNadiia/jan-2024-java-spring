@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: Spring Boot Demo Project
+  profiles:
+    active: store1
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/XXX"
+    username: "postgres"
+    password: "postgres"
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  data:
+    mongodb:
+      uri: "mongodb+srv://bellasark:Bellasark@cluster0.cwsxq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+      database: "product_reviews"
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: ${mail-sender}
+#    password: ${mail-password}
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#
+#mail:
+#  sender:
+#    username: ${mail-sender}

@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Spring Boot Demo Project
+
+reference-data:
+  categories: Phones, Tablets, NoteBooks
+  offices:
+    - name: "Office1"
+      contactNumber: "+5453433"
+      address:
+        city: "Kiyv"
+        street: "Street 1 "
+
+    - name: "Office2"
+      contactNumber: "+3251323"
+      address:
+        city: "Kharkiv"
+        street: "Street 2"
+
+
