@@ -5,10 +5,18 @@ import lombok.RequiredArgsConstructor;
 import org.okten.demo.dto.ReviewDto;
 import org.okten.demo.dto.UpsertProductDto;
 import org.okten.demo.dto.ProductDto;
+import org.okten.demo.entity.Role;
 import org.okten.demo.service.ProductService;
 import org.okten.demo.service.ReviewService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -17,9 +25,8 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    private final ReviewService reviewService;
 
-//    private final ReviewService reviewService;
+    private final ReviewService reviewService;
 
     @GetMapping("/products/{productId}")
     public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) {
@@ -43,11 +50,13 @@ public class ProductController {
         }
     }
 
+    @Secured(Role.SELLER)
     @PostMapping("/products")
     public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody UpsertProductDto product) {
         return ResponseEntity.ok(productService.save(product));
     }
 
+    @Secured(Role.SELLER)
     @PutMapping("/products/{productId}")
     public ResponseEntity<ProductDto> updateProduct(@PathVariable Long productId, @Valid @RequestBody UpsertProductDto productUpdateWith) {
         return ResponseEntity.of(productService.update(productId, productUpdateWith));
